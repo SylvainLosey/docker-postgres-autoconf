@@ -1,5 +1,5 @@
 ARG BASE_TAG
-FROM docker.io/postgres:${BASE_TAG}
+FROM mdillon/postgis:9.6-alpine
 ENTRYPOINT [ "/autoconf-entrypoint" ]
 CMD []
 ENV CERTS="{}" \
@@ -20,11 +20,11 @@ RUN apk add --no-cache python3 \
     && mkdir -p /etc/postgres \
     && chmod a=rwx /etc/postgres
 RUN apk add --no-cache -t .build \
-        build-base \
-        linux-headers \
-        python3-dev \
+    build-base \
+    linux-headers \
+    python3-dev \
     && pip3 install --no-cache-dir \
-        netifaces \
+    netifaces \
     && apk del .build
 COPY autoconf-entrypoint /
 
@@ -32,7 +32,7 @@ COPY autoconf-entrypoint /
 ARG VCS_REF
 ARG BUILD_DATE
 LABEL org.label-schema.vendor=Tecnativa \
-      org.label-schema.license=Apache-2.0 \
-      org.label-schema.build-date="$BUILD_DATE" \
-      org.label-schema.vcs-ref="$VCS_REF" \
-      org.label-schema.vcs-url="https://github.com/Tecnativa/docker-postgres-autoconf"
+    org.label-schema.license=Apache-2.0 \
+    org.label-schema.build-date="$BUILD_DATE" \
+    org.label-schema.vcs-ref="$VCS_REF" \
+    org.label-schema.vcs-url="https://github.com/Tecnativa/docker-postgres-autoconf"

@@ -1,5 +1,5 @@
 ARG BASE_TAG
-FROM mdillon/postgis:11-alpine
+FROM postgis/postgis:10-3.0-alpine
 ENTRYPOINT [ "/autoconf-entrypoint" ]
 CMD []
 ENV CERTS="{}" \
